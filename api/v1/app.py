@@ -3,7 +3,7 @@
 Flask App started with script.
 """
 from api.v1.views import app_views
-from flask import Flask, jsonify, make_respons
+from flask import Flask, jsonify, make_response
 from flask_cors import CORS, cross_origin
 from flask import Blueprint
 from models import storage
