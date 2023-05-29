@@ -8,6 +8,7 @@ from models import storage
 
 app = Flask(__name__)
 
+
 @app_views.route('/status', methods=['GET'])
 def status():
     """
