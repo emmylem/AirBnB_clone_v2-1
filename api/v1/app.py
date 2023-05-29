@@ -21,7 +21,7 @@ CORS(app, resources={r"/api/v1/*": {"origins": "0.0.0.0"}})
 
 
 @app.teardown_appcontext
-def teardown_app(exception):
+def teardown_app(self):
     """
     tearsdown app context.
     """
@@ -33,7 +33,7 @@ def notfound_404(exception):
     """
     handles 404 errors.
     """
-    return make_response(jsonify({"error": "Not found"}), 404)
+    return jsonify({"error": "Not found"}), 404
 
 
 if __name__ == "__main__":
