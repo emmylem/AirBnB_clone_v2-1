@@ -6,6 +6,7 @@ from api.v1.views import app_views
 from flask import Flask, jsonify, request
 from models import storage
 
+app = Flask(__name__)
 
 @app_views.route('/status', methods=['GET'])
 def status():
@@ -36,4 +37,4 @@ def stats():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port="5000")
