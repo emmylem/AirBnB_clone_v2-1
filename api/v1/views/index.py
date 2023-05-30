@@ -1,41 +1,46 @@
 #!/usr/bin/python3
 """
-Flask route that returns json status response
+index
 """
+
+from flask import jsonify
 from api.v1.views import app_views
-from flask import Flask, jsonify, request
+
 from models import storage
 
-app = Flask(__name__)
 
-
-@app_views.route('/status', methods=['GET'])
+@app_views.route("/status", methods=['GET'], strict_slashes=False)
 def status():
     """
-    checks status of json."""
-    return jsonify({"status": "OK"})
+    status route
+    :return: response with json
+    """
+    data = {
+        "status": "OK"
+    }
+
+    resp = jsonify(data)
+    resp.status_code = 200
+
+    return resp
 
 
-@app_views.route('/stats', methods=['GET'])
+@app_views.route("/stats", methods=['GET'], strict_slashes=False)
 def stats():
     """
-    function to return the count of all class objects
+    stats of all objs route
+    :return: json of all objs
     """
-    if request.method == 'GET':
-        obj_response = {}
-        Areas = {
-            "Amenity": "amenities",
-            "City": "cities",
-            "Place": "places",
-            "Review": "reviews",
-            "State": "states",
-            "User": "users"
-        }
-        for key, value in Areas.items():
-            response[value] = storage.count(key)
-        return jsonify(obj_response)
+    data = {
+        "amenities": storage.count("Amenity"),
+        "cities": storage.count("City"),
+        "places": storage.count("Place"),
+        "reviews": storage.count("Review"),
+        "states": storage.count("State"),
+        "users": storage.count("User"),
+    }
 
+    resp = jsonify(data)
+    resp.status_code = 200
 
-if __name__ == '__main__':
-    app.debug = True
-    app.run(host="0.0.0.0", port="5000")
+    return resp
